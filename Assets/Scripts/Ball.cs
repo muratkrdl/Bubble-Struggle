@@ -80,4 +80,12 @@ public class Ball : MonoBehaviour
         }    
     }
 
+    void OnDestroy() 
+    {
+        if(GameManager.Instance.CheckWin())
+        {
+            GameManager.Instance.ShowWinPanel();
+        }    
+    }
+
 }

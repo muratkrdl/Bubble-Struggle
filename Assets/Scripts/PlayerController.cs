@@ -38,8 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Ball"))
         {
-            Time.timeScale = 0;
-            Debug.Log("Game Over !");
+            GameManager.Instance.ShowGameOverPanel();
         }    
     }
 
