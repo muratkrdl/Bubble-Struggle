@@ -8,6 +8,18 @@ public class Ball : MonoBehaviour
     [SerializeField] float bounceAmount = 1f;
     [SerializeField] float xMoveAmount = 15f;
 
+    public float XMoveAmount
+    {
+        get
+        {
+            return xMoveAmount;
+        }
+        set
+        {
+            xMoveAmount = value;
+        }
+    }
+
     [SerializeField] bool isXL;
     [SerializeField] bool isL;
     [SerializeField] bool isM;
@@ -18,18 +30,20 @@ public class Ball : MonoBehaviour
 
     void Start() 
     {
-        myRigid.AddForce(new Vector2(150, 0));
+        myRigid.AddForce(new Vector2(xMoveAmount * Time.fixedDeltaTime, bounceAmount * Time.fixedDeltaTime /2));
     }
 
     void OnCollisionEnter2D(Collision2D other) 
     {
         if(other.gameObject.CompareTag("Bounce"))
         {
+            myRigid.velocity = Vector2.zero;
             myRigid.AddForce(new Vector2(xMoveAmount * Time.fixedDeltaTime, bounceAmount * Time.fixedDeltaTime));
         }
 
         if(other.gameObject.CompareTag("Wall"))
         {
+            myRigid.velocity = Vector2.zero;
             xMoveAmount *= -1;
             myRigid.AddForce(new Vector2(xMoveAmount * 1.75f * Time.fixedDeltaTime, 0));
         }
@@ -44,38 +58,24 @@ public class Ball : MonoBehaviour
             if(isXL)
             {
                 var first = Instantiate(LBall, transform.position, Quaternion.identity);
-                first.GetComponent<Rigidbody2D>().AddForce(new Vector2(
-                    xMoveAmount * 1.5f * Time.fixedDeltaTime, 
-                    bounceAmount * Time.fixedDeltaTime /2));
 
                 var second = Instantiate(LBall, transform.position, Quaternion.identity);
-                second.GetComponent<Rigidbody2D>().AddForce(new Vector2(
-                    -xMoveAmount * 1.5f * Time.fixedDeltaTime, 
-                    bounceAmount * Time.fixedDeltaTime /2));
+                second.GetComponent<Ball>().XMoveAmount *= -1; 
+
             }
             else if(isL)
             {
                 var first = Instantiate(MBall, transform.position, Quaternion.identity);
-                first.GetComponent<Rigidbody2D>().AddForce(new Vector2(
-                    xMoveAmount * 1.5f * Time.fixedDeltaTime, 
-                    bounceAmount * Time.fixedDeltaTime /2));
 
                 var second = Instantiate(MBall, transform.position, Quaternion.identity);
-                second.GetComponent<Rigidbody2D>().AddForce(new Vector2(
-                    -xMoveAmount * 1.5f * Time.fixedDeltaTime, 
-                    bounceAmount * Time.fixedDeltaTime /2));
+                second.GetComponent<Ball>().XMoveAmount *= -1; 
             }
             else if(isM)
             {
                 var first = Instantiate(SBall, transform.position, Quaternion.identity);
-                first.GetComponent<Rigidbody2D>().AddForce(new Vector2(
-                    xMoveAmount * 1.5f * Time.fixedDeltaTime, 
-                    bounceAmount * Time.fixedDeltaTime /2));
 
                 var second = Instantiate(SBall, transform.position, Quaternion.identity);
-                second.GetComponent<Rigidbody2D>().AddForce(new Vector2(
-                    -xMoveAmount * 1.5f * Time.fixedDeltaTime, 
-                    bounceAmount * Time.fixedDeltaTime /2));
+                second.GetComponent<Ball>().XMoveAmount *= -1; 
             }
         }    
     }

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject firePrefab;
 
     [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float xRange;
 
     bool isPressFireButton => Input.GetKeyDown(KeyCode.S);
 
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     
         Vector2 newPos = transform.position;
         newPos.x += moveInput * moveSpeed * Time.deltaTime;
+        newPos.x = Mathf.Clamp(newPos.x,-xRange,xRange);
 
         transform.position = newPos;
     }
