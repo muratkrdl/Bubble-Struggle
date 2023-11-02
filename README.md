@@ -1,7 +1,9 @@
 
 # Bubble-Struggle
 
-Try to get right under each of the huge bubbles that surround you and shoot at the right time if you want to hit and divide it into new bubbles smaller and smaller
+Try to get right under each of the huge bubbles that surround you and shoot at the right time
+
+If you want to hit and divide it into new bubbles smaller and smaller
 
 Until you empty the screen of small bubbles you will not have the chance to win
 
